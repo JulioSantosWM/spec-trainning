@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WidgetComponent when the component has finished loading should display the table with the data 1`] = `
+<div
+  id="root1"
+>
+  <app-widget>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          User Details Dashboard
+        </mat-card-title>
+        
+      </mat-card-header>
+      <mat-card-content>
+        <br />
+        <div
+          class="main-container"
+        >
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            style="width: 1000px; height: 600px;"
+          />
+          
+        </div>
+        
+      </mat-card-content>
+      
+    </mat-card>
+    
+  </app-widget>
+</div>
+`;
+
+exports[`WidgetComponent when the component has finished loading when a row is clicked should deselect the selected user when the same row is clicked twice 1`] = `
+<div
+  id="root5"
+>
+  <app-widget>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          User Details Dashboard
+        </mat-card-title>
+        
+      </mat-card-header>
+      <mat-card-content>
+        <br />
+        <div
+          class="main-container"
+        >
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            style="width: 1000px; height: 600px;"
+          />
+          
+        </div>
+        
+      </mat-card-content>
+      
+    </mat-card>
+    
+  </app-widget>
+</div>
+`;
+
+exports[`WidgetComponent when the component has finished loading when a row is clicked should update the selected user when a row is clicked 1`] = `
+<div
+  id="root4"
+>
+  <app-widget>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          User Details Dashboard
+        </mat-card-title>
+        
+      </mat-card-header>
+      <mat-card-content>
+        <br />
+        <div
+          class="main-container"
+        >
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            style="width: 1000px; height: 600px;"
+          />
+          <div
+            class="details-container"
+          >
+            <app-w-user-focus />
+            <app-w-credit-card-details
+              class="credit-card-details"
+            />
+          </div>
+          
+        </div>
+        
+      </mat-card-content>
+      
+    </mat-card>
+    
+  </app-widget>
+</div>
+`;
+
+exports[`WidgetComponent when the component is initializing should display a loading spinner 1`] = `
+<div
+  id="root0"
+>
+  <app-widget>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          User Details Dashboard
+        </mat-card-title>
+        
+      </mat-card-header>
+      <mat-card-content>
+        <br />
+        <div
+          class="spinner-container"
+        >
+          <mat-spinner />
+        </div>
+        
+      </mat-card-content>
+      
+    </mat-card>
+    
+  </app-widget>
+</div>
+`;

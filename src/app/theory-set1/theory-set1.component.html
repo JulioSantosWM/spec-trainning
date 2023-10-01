@@ -1,0 +1,221 @@
+<h2>Theory Set1 - Jest Matchers</h2>
+<p>This set of tests is about understanding the basic Jest matchers as well as their intricacies.</p>
+<mat-divider></mat-divider>
+<h3>Common Matchers</h3>
+<mat-accordion [multi]="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.toBe vs .toEqual</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    Objects will match with <span class="code">toBe</span>if their reference is the same but will fail if the reference is distinct, even if the properties have the same value.<br>
+    This is because <span class="code">toBe</span> uses <span class="code">Object.is</span> to test exact equality.<br>
+    <br>
+    <span class="code">toEqual</span> recursively checks every field of an object or array, except for <span class="code">undefined</span> properties.<br>
+    Object references are not taken into account, the in relies on the keys/values only.<br>
+    To take these into account use <span class="code">toStrictEqual</span> instead.<br>
+    <br>
+    Unless we want to ensure that we are still using the same object, it is better to rely on <span class="code">toEqual</span> instead of <span class="code">toBe</span>.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersToBeToEqualTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersToBeToEqualSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Truthiness</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    There are several ways to be assert if something is <span class="code">true</span>, <span class="code">false</span> or <span class="code">undefined</span>.<br>
+    You should use the matcher that most precisely corresponds to what you want your code to be doing:<br>
+    <ul>
+      <li><span class="code">toBeNull</span> matches only <span class="code">null</span></li>
+      <li><span class="code">toBeUndefined</span> matches only <span class="code">undefined</span></li>
+      <li><span class="code">toBeDefined</span> is the opposite of <span class="code">toBeUndefined</span></li>
+      <li><span class="code">toBeTruthy</span> matches anything that an if statement treats as true</li>
+      <li><span class="code">toBeFalsy</span> matches anything that an if statement treats as false</li>
+    </ul>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.toMatch</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <span class="code">toMatch</span> can check if a <span class="code">string</span> matches a <span class="code">RegExp</span>.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersToMatchTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersToMatchSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.toContain</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <span class="code">toContain</span> can check if a element exists in a <span class="code">array</span>.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersToContainTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersToContainSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Exceptions</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    You can test exceptions by wrapping the method that throws it inside a callback and using the <span class="code">toThrow</span> matcher.<br>
+    You can also pass a <span class="code">RegExp</span> to match the error message.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersExceptionTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersExceptionSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.toMatchSnapshot</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    To check that an HTML or a complex object has an specify value we can use the <span class="code">toMatchSnapshot</span> matcher.<br>
+    A name for the snapshot can be given, or it will infer the spec name.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersSnapshotTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersSnapshotSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SNAPSHOT"><pre><code [highlight]="JestMatchersSnapshotFileCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+    <br>
+    When a spec with this matcher is run for the first time, it will create a folder <i>__snapshots</i> where it will place all the snapshots taken.<br>
+    Updating an existing snapshot can be done by some IDE's automatically, otherwise if you are sure the snapshot is outdate, you can run a command to to update it.<br>
+    <ul>
+      <li>In <span class="code">yarn</span> the command is: <span class="code">yarn test -u</span></li>
+      <li>In <span class="code">npm</span> the command is: <span class="code">npm run test -- -u</span></li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<h3>Spies</h3>
+<mat-accordion [multi]="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>jest.spyOn & jest.fn</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    One of the ways to mock a method of a dependency is with <span class="code">jest.spyOn</span>.<br>
+    It sets a spy on an function that allows us to define its implementation or return, verify how many times it is called and the arguments passed.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersSpyOnTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersSpyOnSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+    <br>
+    Another way to create a spy is with the <span class="code">jest.fn</span>.<br>
+    This creates an instance of a spy that can replaced the original implementation of method.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersFnTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersFnSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+    <br>
+
+    The difference between <span class="code">jest.spyOn</span> and <span class="code">jest.fn</span> is that the first allows to keep the original implementation.
+    <span class="code">jest.fn</span> can't be used add a spy and still use the original implementation.
+  
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.mockResolvedValue & .mockRejectedValue</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    When dealing with promises, jest provides wrappers for easier mocking of their return value:<br>
+    <ul>
+      <li><span class="code">.mockResolvedValue</span>:  used on a spy to set the return has a promised that resolved successfully.</li>
+      <li><span class="code">.mockRejectedValue</span>:  used on a spy to set the return has a promised that resolved with a failure.</li>
+    </ul>
+    <br>
+    Additionally, jest provides two matching utilities that should be used in the expectation, these are <span class="code">.resolves</span> and <span class="code">.rejects</span><br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersAsyncTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersAsyncSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group> 
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.toHaveBeenCalledTimes</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    When using spies, it is common that the same method is called multiple times.<br>
+    In order to verify that the program executed the flow we expect, we need to check the number of calls.<br>
+    
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersCountingCallsTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersCountingCallsSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>.toHaveBeenCalledWith</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    Similarly to counting calls, we may also need to check that a spied method is called with the expected arguments.<br>
+    
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersVerifyArgTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersVerifyArgSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>jest.clearAllMocks</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    It is common that we create a dependency that is reused across all specs.<br>
+    While this may make testing quicker an easier it may create an error where the same spy is reused across all specs<br>
+    <br>
+    This means that we will face an error that the spy has not been reset and it is including the counter/argument tracking from previous specs.<br>
+    We can use the utility function <span class="code">jest.clearAllMocks</span>.<br>
+    This method does not remove the mocked implementation, it only resets the counter/argument tracking.<br>
+    
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="JestMatchersResettingTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="JestMatchersResettingSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+
+    <br>
+    There are two addition jest functions that are similar to <span class="code">jest.clearAllMocks</span>, these are:
+    <ul>
+      <li><span class="code">jest.resetAllMocks</span>: replaces all the mock implementations with an empty functions, returning <span class="code">undefined</span>;</li> 
+      <li><span class="code">jest.restoreAllMocks</span>: replaces all the mock implementations with the original implementations, meaning we will use the original implementations;</li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>

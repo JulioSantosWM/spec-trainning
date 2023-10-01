@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreditCardDetailsComponent when initializing the component should not view the spinner if the card is collapsed 1`] = `
+<div
+  id="root0"
+>
+  <app-w-credit-card-details>
+    <mat-card>
+      <mat-card-header
+        class="mat-card-header"
+      >
+        <mat-card-title>
+          Credit Card Details
+        </mat-card-title>
+        
+        <mat-card-subtitle>
+          Disclaimer: this is sensible information
+        </mat-card-subtitle>
+        
+        <button
+          mat-icon-button=""
+        >
+          <mat-icon>
+            unfold_more
+          </mat-icon>
+        </button>
+      </mat-card-header>
+      
+    </mat-card>
+    
+  </app-w-credit-card-details>
+</div>
+`;
+
+exports[`CreditCardDetailsComponent when initializing the component should view the spinner if the card is expanded 1`] = `
+<div
+  id="root1"
+>
+  <app-w-credit-card-details>
+    <mat-card>
+      <mat-card-header
+        class="mat-card-header"
+      >
+        <mat-card-title>
+          Credit Card Details
+        </mat-card-title>
+        
+        <mat-card-subtitle>
+          Disclaimer: this is sensible information
+        </mat-card-subtitle>
+        
+        <button
+          mat-icon-button=""
+        >
+          <mat-icon>
+            unfold_less
+          </mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content
+        class="mat-card-content"
+      >
+        <div
+          class="spinner-container"
+        >
+          <mat-spinner />
+        </div>
+        
+      </mat-card-content>
+      
+      
+    </mat-card>
+    
+  </app-w-credit-card-details>
+</div>
+`;
+
+exports[`CreditCardDetailsComponent when the component has loaded should not view the credit card details if the card is collapsed 1`] = `
+<div
+  id="root2"
+>
+  <app-w-credit-card-details>
+    <mat-card>
+      <mat-card-header
+        class="mat-card-header"
+      >
+        <mat-card-title>
+          Credit Card Details
+        </mat-card-title>
+        
+        <mat-card-subtitle>
+          Disclaimer: this is sensible information
+        </mat-card-subtitle>
+        
+        <button
+          mat-icon-button=""
+        >
+          <mat-icon>
+            unfold_more
+          </mat-icon>
+        </button>
+      </mat-card-header>
+      
+    </mat-card>
+    
+  </app-w-credit-card-details>
+</div>
+`;
+
+exports[`CreditCardDetailsComponent when the component has loaded should view the credit card details if the card is expanded 1`] = `
+<div
+  id="root3"
+>
+  <app-w-credit-card-details>
+    <mat-card>
+      <mat-card-header
+        class="mat-card-header"
+      >
+        <mat-card-title>
+          Credit Card Details
+        </mat-card-title>
+        
+        <mat-card-subtitle>
+          Disclaimer: this is sensible information
+        </mat-card-subtitle>
+        
+        <button
+          mat-icon-button=""
+        >
+          <mat-icon>
+            unfold_less
+          </mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content
+        class="mat-card-content"
+      >
+        <div>
+          <label>
+            Provider:
+          </label>
+          <span>
+             bar
+          </span>
+        </div>
+        <div>
+          <label>
+            Number:
+          </label>
+          <span>
+             baz
+          </span>
+        </div>
+        <div>
+          <label>
+            Expiry date:
+          </label>
+          <span>
+             qux
+          </span>
+        </div>
+        
+        
+      </mat-card-content>
+      
+      
+    </mat-card>
+    
+  </app-w-credit-card-details>
+</div>
+`;

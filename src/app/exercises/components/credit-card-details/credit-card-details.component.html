@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-header class="mat-card-header">
+    <mat-card-title>Credit Card Details</mat-card-title>
+    <mat-card-subtitle>Disclaimer: this is sensible information</mat-card-subtitle>
+    <button mat-icon-button
+      (click)="toggleExpandCollapse()">
+      <mat-icon>{{ expanded ? "unfold_less" : "unfold_more" }}</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content class="mat-card-content" *ngIf="expanded">
+    <ng-container *ngIf="!isLoading; else loading">
+      <div>
+        <label>Provider:</label>
+        <span> {{ creditCardDetails?.credit_card_type }}</span>
+      </div>
+      <div>
+        <label>Number:</label>
+        <span> {{ creditCardDetails?.credit_card_number }}</span>
+      </div>
+      <div>
+        <label>Expiry date:</label>
+        <span> {{ creditCardDetails?.credit_card_expiry_date }}</span>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

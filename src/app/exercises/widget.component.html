@@ -1,0 +1,35 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>User Details Dashboard</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <br>
+    <div *ngIf="!isLoading; else loading" class="main-container">
+      <ag-grid-angular
+        style="width: 1000px; height: 600px;"
+        class="ag-theme-alpine"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        (gridReady)="onGridReady($event)"
+        (rowClicked)="onRowClicked($event)">
+      </ag-grid-angular>
+      <div *ngIf="selectedUser" class="details-container">
+        <app-w-user-focus
+          [user]="selectedUser"
+        ></app-w-user-focus>
+        <app-w-credit-card-details
+          class="credit-card-details"
+          [expanded]="ccDetailsExpanded"
+          (onExpandCollapseChange)="onCCDetailsToggle($event)"
+        ></app-w-credit-card-details>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

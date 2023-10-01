@@ -1,0 +1,237 @@
+<h2>Theory Set2 - ngMocks basics</h2>
+<p>This set of tests is about understanding ngMocks basics most common elements.</p>
+<mat-divider></mat-divider>
+<h3>MockBuilder</h3>
+<mat-accordion [multi]="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockBuilder</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    In order to create a component/service/directive/pipe (feature), we can use the <span class="code">MockBuilder</span>.<br>
+    It provides a simplified way to create the feature by providing a simplified api that sits on top of the <span class="code">TestBed</span>.<br>
+    The <span class="code">MockBuilder</span> most be returned in a <span class="code">beforeEach</span> prior to all specs.<br>
+    <pre><code [highlight]="MockBuilderCode" [lineNumbers]="true"></code></pre>
+
+    For components that require utilize other components, by default, <span class="code">MockBuilder</span> will mock all these elements from the HTML.<br>
+    They will continue to appear in snapshots of the component, but will not have any impact on the specs themselves.
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockBuilderTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockBuilderHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockBuilderSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockBuilder().keep</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    There are some services which are not practical to mock, a good example is the <span class="code">FormBuilder</span> service and the broader <span class="code">FormsModule</span> and <span class="code">ReactiveFormsModule</span>'s.<br>
+    We can keep these services across our code by utilizing the <span class="code">.keep</span> method of the <span class="code">MockBuilder</span>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockBuilderKeepTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockBuilderKeepHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockBuilderKeepSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockBuilder().mock</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    There are some cases in which we want to define the mock for a dependency to be used across all our specs.<br>
+    The best example of this are the <span class="code">@Inject(TOKEN)</span> that are passed in a constructor.<br>
+    These then to not need modifications across specs and therefor only need to be defined once.<br>
+    We can provide a default mock by using the <span class="code">.mock</span> method of the <span class="code">MockBuilder</span>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockBuilderMockTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockBuilderMockHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockBuilderMockSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
+<h3>MockRender</h3>
+<mat-accordion [multi]="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockRender</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    In order to gain access to a feature, after it as been created we can use the <span class="code">MockRender</span>.<br>
+    It receives 3 arguments, with the first being the component that we passed to the <span class="code">MockBuilder</span>.<br>
+    It returns a <span class="code">MockedComponentFixture</span>, which is a wrapper on top of the usual <span class="code">ComponentFixture</span> with additional methods.<br>
+    A recommendation is to always store the result of the <span class="code">MockRender</span> in the <span class="code">fixture</span> variable.<br>
+   <pre><code [highlight]="MockRenderCode" [lineNumbers]="true"></code></pre>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockRender properties</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    The fixture exposes several useful methods, the more commonly used are:
+    <ul>
+      <li><span class="code">fixture.point.componentInstance</span>: it provides access to the feature class that is used in assertions.</li>
+      <li><span class="code">fixture.componentInstance</span>: it provides access to the wrapper class that is used in update the <span class="code">@Inputs</span> while specs are running .</li>
+      <li><span class="code">fixture.nativeElement</span>: it returns the <span class="code">nativeElement</span>, which can be used by <span class="code">toMatchSnapshot</span> to check if the HTML is correct.</li>
+      <li><span class="code">fixture.debugElement</span>: it returns an object with the methods <span class="code">query</span> and <span class="code">queryAll</span>, which can be used to check a specific part of the HTML.</li>
+    </ul>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockRender inputs</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    The second argument that the <span class="code">MockRender</span> can receive is an object that consists of the <span class="code">@Input</span>'s and <span class="code">@Output</span>'s of the components.<br>
+    When utilizing <span class="code">@Input</span>'s or <span class="code">@Output</span>'s we also need to update the type of the fixture to be the partial of all <span class="code">@Input</span>'s and <span class="code">@Output</span>'s.<br>
+    We do this since otherwise we would have an error when trying to set only some <span class="code">@Input</span>'s and <span class="code">@Output</span>'s.<br>
+    <br>
+    If the <span class="code">MockRender</span> does not receive an object for the inputs, then all <span class="code">@Input</span>'s' will be set to <span class="code">null</span>.<br>
+    We can provide an empty object to ensure that <span class="code">MockRender</span> sets the default values on each of the <span class="code">@Input</span> properties.
+    <br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockRenderInputsTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockRenderInputsHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockRenderInputsSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+    <br>
+    We can use the <span class="code">fixture.componentInstance</span> to simulate changes to the inputs.<br>
+    Whenever we call the <span class="code">fixture.componentInstance</span> to assign a new value to one of the <span class="code">@Inputs</span>, we also need to run a new change detection cycle.<br>
+    This is because the template that we are querying with the <span class="code">fixture.nativeElement</span> has not been refreshed after the <span class="code">@Input</span> change.<br>
+    We do this by calling <span class="code">fixture.detectChanges()</span> after changing the <span class="code">@Inputs</span>.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockRenderInputsChangeTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockRenderInputsChangeHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockRenderInputsChangeSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockRender outputs</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    The second argument that the <span class="code">MockRender</span> can receive is an object that consists of the <span class="code">@Input</span>'s and <span class="code">@Output</span>'s of the components.<br>
+    When utilizing <span class="code">@Input</span>'s or <span class="code">@Output</span>'s we also need to update the type of the fixture to be the partial of all <span class="code">@Input</span>'s and <span class="code">@Output</span>'s.<br>
+    We do this since otherwise we would have an error when trying to set only some <span class="code">@Input</span>'s and <span class="code">@Output</span>'s.<br>
+    <br>
+    The testing of event emitters is done with the use of the <span class="code">jest.fn()</span> spy generator function.
+    We pass a spy instance per each <span class="code">@Output</span> value to the <span class="code">MockRender</span> and then listen to ensure it is called.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockRenderOutputsTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockRenderOutputsHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockRenderOutputsSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockRender change detection</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    The third argument that the <span class="code">MockRender</span> can receive is a boolean to determine if the change detection needs to be run manually or not .<br>
+    Running the change detection manually is useful for situations in some types of situations:<br>
+    <ul>
+      <li><span class="code">ChangeDetection.OnPush</span>: the browser only refreshes the template when an browser event is emitted</li>
+      <li><span class="code">Promises</span>: can postpone the time when the HTML is drawn by blocking the browser's resources</li>
+    </ul>    
+    <br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockRenderChangeDetectionTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="MockRenderChangeDetectionHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockRenderChangeDetectionSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<h3>MockInstance</h3>
+<mat-accordion [multi]="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockInstance</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">MockInstance</span> is a useful utility to setup mocks prior to the test initialization.<br>
+    The most basic use of <span class="code">MockInstance</span> is directly in the spec, prior to the use of <span class="code">MockRender</span>.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockInstanceTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockInstance multiple</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">MockInstance</span> allows us to setup the return shape of an entire object by passing a callback instead of the method name.<br>
+    This is very useful when we want to setup a complex mock that will be reused across multiple specs.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockInstanceMultipleTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceMultipleSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockInstance Scope</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">MockInstance</span> allows us to setup default mocks for all specs going forward by creating a scope.<br>
+    This scope provides a basic point that is reused across specs.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockInstanceScopeTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceScopeSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockInstance multiple scopes</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    We can leverage multiple scopes to chain the initial state of our specs across multiple describes.<br>
+    Without the use of the <span class="code">MockInstance.scope()</span> in the describes, the <span class="code">MockInstance</span> is shared across multiple describes.
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockInstanceMultipleScopeTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceMultipleScopeSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>MockInstance multiple scopes</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    We can leverage multiple scopes to chain the initial state of our specs across multiple describes.<br>
+    Without the use of the <span class="code">MockInstance.scope()</span> in the describes, the <span class="code">MockInstance</span> is shared across multiple describes.
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="MockInstanceMultipleScopeTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceMultipleScopeSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</mat-accordion>

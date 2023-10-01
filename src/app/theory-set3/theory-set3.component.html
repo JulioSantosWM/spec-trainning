@@ -1,0 +1,142 @@
+<h2>Theory Set3 - Utilities</h2>
+<p>This set of tests is about understanding utility functions.</p>
+<mat-divider></mat-divider>
+<mat-accordion [multi]="true">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>ngMocks.get</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    The most commonly used utility function provided by ng-mocks is <span class="code">ngMocks.get</span>.<br>
+    This utility retrieves the instance of the service that is declared in the <span class="code">MockRender</span>.<br>
+    It is very useful to fetch the spies that are set in mocks that are defined at a describe level.<br>
+    <br>
+    If a service and its mock is setup after the <span class="code">MockRender</span>, then <span class="code">ngMocks.get</span> will not be able to fetch it.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesGetTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesGetSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>ngMocks.find</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">ngMocks.find</span> is a utility function provided by ng-mocks that retrieves an element from the template via css queries.<br>
+    This utility retrieves the html element that matches provided css selector, or if nothing is found, the value defined as the not found value.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesFindTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesFindHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesFindSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+
+    A recommended pattern for component testing is the <a href="https://angular.io/guide/testing-components-scenarios#use-a-page-object"> Page Pattern</a> that is described in the Angular docs.<br>
+    The idea of this pattern is to create a specific class that encapsulates all the queries that are used for component testing.<br>
+    Doing so creates a single point where all queries are centralized and reduces the duplication in specs.<br>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>ngMocks.click</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">ngMocks.click</span> is a utility function provided by ng-mocks that simulates the click on a particular element.<br>
+    We only need to provided the HTML element, or the css query that we match the element that we want to click on.<br>
+    <br>
+    Every event triggered will require a change detection cycle to be ran in order to impact the rendered html, regardless of change detection strategy.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesClickTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesClickHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesClickSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>ngMocks.output</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">ngMocks.output</span> is a utility function provided by ng-mocks that allows for easier triggering of events emitted by other components.<br>
+    We only need to provided the HTML element selector, or the css query that we match the element and the name of the event.<br>
+    This gives us access to the component instance, where we can call the <span class="code">emit</span> method to trigger an event emission.<br>
+    <br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesOutputTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesOutputHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesOutputSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>ngMocks.trigger</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">ngMocks.trigger</span> is what wraps the <span class="code">ngMocks.click</span>.It allows us to trigger events of whatever type we want.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesTriggerTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesTriggerHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesTriggerSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>fixture.whenStable</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    Components that have asynchronous elements will often require that we await for them to be stable, this is done with the <span class="code">fixture.whenStable</span> method.<br>
+    This enables us to wait for the execution of the method prior verifying the assertions.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesWhenStableTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesWhenStableHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesWhenStableSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>fakeAsync & tick</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <span class="code">fakeAsync</span> and <span class="code">tick</span> are methods that allows us to manipulate the passage of time in our specs.<br>
+    <span class="code">fakeAsync</span> attaches into the processing of asynchronous tasks like timers, intervals, <span class="code">Promises</span> and <span class="code">Observables</span>.<br>
+    <span class="code">tick</span> allows us to advance the virtual clock created by <span class="code">fakeAsync</span> and move the time forward.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesFakeAsyncTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesFakeAsyncHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesFakeAsyncSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>fixture.nativeElement</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    A useful utility is the <span class="code">fixture.nativeElement</span>, which returns the html code that is rendered by the browser.<br>
+    We can use this in combination with the <span class="code">toMatchSnapshot</span> matcher to have a cleaner snapshot image.<br>
+    It can also be useful to debug tests when we expect an element to be rendered but it is not being rendered.<br>
+
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesNativeElementTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="HTML"><pre><code [highlight]="ngMockUtilitiesNativeElementHTMLCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesNativeElementSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+  </mat-expansion-panel>
+</mat-accordion>

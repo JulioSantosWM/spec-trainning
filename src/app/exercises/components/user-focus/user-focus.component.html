@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header class="mat-card-header">
+    <mat-card-title>{{ user.name }}</mat-card-title>
+    <mat-card-subtitle>{{ user.date_of_birth | date }}</mat-card-subtitle>
+    <img [src]="user.avatar"> 
+  </mat-card-header>
+  <mat-card-content class="mat-card-content">
+    <div>
+      <label>Street Name:</label>
+      <span> {{ user.address.street_name }}</span>
+    </div>
+    <div>
+      <label>City Name:</label>
+      <span> {{ user.address.city }}</span>
+    </div>
+    <div>
+      <label>Zip Code:</label>
+      <span> {{ user.address.zip_code }}</span>
+    </div>
+    <div>
+      <label>State:</label>
+      <span> {{ user.address.state }}</span>
+    </div>
+    <div>
+      <label>Country:</label>
+      <span> {{ user.address.country }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

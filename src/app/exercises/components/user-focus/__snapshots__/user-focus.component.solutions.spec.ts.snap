@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserFocusComponent should match the snapshot 1`] = `
+<div
+  id="root0"
+>
+  <app-w-user-focus>
+    <mat-card>
+      <mat-card-header
+        class="mat-card-header"
+      >
+        <mat-card-title>
+          foo
+        </mat-card-title>
+        
+        <mat-card-subtitle>
+          Jan 1, 1970
+        </mat-card-subtitle>
+        
+        <img
+          src="http://foo.com"
+        />
+      </mat-card-header>
+      <mat-card-content
+        class="mat-card-content"
+      >
+        <div>
+          <label>
+            Street Name:
+          </label>
+          <span>
+             foo
+          </span>
+        </div>
+        <div>
+          <label>
+            City Name:
+          </label>
+          <span>
+             bar
+          </span>
+        </div>
+        <div>
+          <label>
+            Zip Code:
+          </label>
+          <span>
+             baz
+          </span>
+        </div>
+        <div>
+          <label>
+            State:
+          </label>
+          <span>
+             qux
+          </span>
+        </div>
+        <div>
+          <label>
+            Country:
+          </label>
+          <span>
+             quux
+          </span>
+        </div>
+      </mat-card-content>
+      
+    </mat-card>
+  </app-w-user-focus>
+</div>
+`;

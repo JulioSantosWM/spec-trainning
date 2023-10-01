@@ -1,0 +1,23 @@
+img {
+  border-radius: 50%;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  background-color: whitesmoke;
+  width: 80px;
+  height: 80px;
+}
+
+label {
+  padding-right: 12px;
+  font-weight: 600;
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mat-card-content {
+  padding-left: 16px;
+}

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataMapperService when mapping to a user should map a user according to the default mapping 1`] = `
+{
+  "address": [MockFunction],
+  "avatar": [MockFunction],
+  "date_of_birth": Date { NaN },
+  "id": [MockFunction],
+  "name": "bar baz",
+  "primary_contact": "qux",
+  "uid": "foo",
+  "username": [MockFunction],
+}
+`;
+
+exports[`DataMapperService when mapping to a user should map a user with the name as first_name 1`] = `
+{
+  "address": [MockFunction],
+  "avatar": [MockFunction],
+  "date_of_birth": Date { NaN },
+  "id": [MockFunction],
+  "name": "bar",
+  "primary_contact": "qux",
+  "uid": "foo",
+  "username": [MockFunction],
+}
+`;
+
+exports[`DataMapperService when mapping to a user should map a user with the name as last_name 1`] = `
+{
+  "address": [MockFunction],
+  "avatar": [MockFunction],
+  "date_of_birth": Date { NaN },
+  "id": [MockFunction],
+  "name": "baz",
+  "primary_contact": "qux",
+  "uid": "foo",
+  "username": [MockFunction],
+}
+`;
+
+exports[`DataMapperService when mapping to a user should map a user with the primary contact as email 1`] = `
+{
+  "address": [MockFunction],
+  "avatar": [MockFunction],
+  "date_of_birth": Date { NaN },
+  "id": [MockFunction],
+  "name": "bar baz",
+  "primary_contact": "quux",
+  "uid": "foo",
+  "username": [MockFunction],
+}
+`;

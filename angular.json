@@ -37,7 +37,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/highlight.js/styles/androidstudio.css"
             ],
             "scripts": []
           },
