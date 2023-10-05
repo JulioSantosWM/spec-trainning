@@ -31,7 +31,8 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     There are some services which are not practical to mock, a good example is the <span class="code">FormBuilder</span> service and the broader <span class="code">FormsModule</span> and <span class="code">ReactiveFormsModule</span>'s.<br>
-    We can keep these services across our code by utilizing the <span class="code">.keep</span> method of the <span class="code">MockBuilder</span>
+    We can keep these services across our code by utilizing the <span class="code">.keep</span> method of the <span class="code">MockBuilder</span><br>
+    Doing so means that when the methods of these services are called, the actual implementation is used.<br>
 
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="TS"><pre><code [highlight]="MockBuilderKeepTSCode" [lineNumbers]="true"></code></pre></mat-tab>
@@ -49,7 +50,11 @@
     There are some cases in which we want to define the mock for a dependency to be used across all our specs.<br>
     The best example of this are the <span class="code">@Inject(TOKEN)</span> that are passed in a constructor.<br>
     These then to not need modifications across specs and therefor only need to be defined once.<br>
-    We can provide a default mock by using the <span class="code">.mock</span> method of the <span class="code">MockBuilder</span>
+    We can provide a default mock by using the <span class="code">.mock</span> method of the <span class="code">MockBuilder</span><br>
+    <br>
+    We can also use the <span class="code">.mock</span> with services.<br>
+    Doing so will mean that by default all calls to the service will return in the value provided in the mock.<br>
+    The big downside of this approach is that we are require to implement the entire signature of the service, even if we don't use it.<br>
 
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="TS"><pre><code [highlight]="MockBuilderMockTSCode" [lineNumbers]="true"></code></pre></mat-tab>
@@ -181,21 +186,6 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <b>MockInstance multiple</b>
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <span class="code">MockInstance</span> allows us to setup the return shape of an entire object by passing a callback instead of the method name.<br>
-    This is very useful when we want to setup a complex mock that will be reused across multiple specs.<br>
-
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="TS"><pre><code [highlight]="MockInstanceMultipleTSCode" [lineNumbers]="true"></code></pre></mat-tab>
-      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceMultipleSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
-    </mat-tab-group>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
         <b>MockInstance Scope</b>
       </mat-panel-title>
     </mat-expansion-panel-header>
@@ -210,14 +200,15 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <b>MockInstance multiple scopes</b>
+        <b>MockInstance multiple</b>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    We can leverage multiple scopes to chain the initial state of our specs across multiple describes.<br>
-    Without the use of the <span class="code">MockInstance.scope()</span> in the describes, the <span class="code">MockInstance</span> is shared across multiple describes.
+    <span class="code">MockInstance</span> allows us to setup the return shape of an entire object by passing a callback instead of the method name.<br>
+    This is very useful when we want to setup a complex mock that will be reused across multiple specs.<br>
+
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-      <mat-tab label="TS"><pre><code [highlight]="MockInstanceMultipleScopeTSCode" [lineNumbers]="true"></code></pre></mat-tab>
-      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceMultipleScopeSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="TS"><pre><code [highlight]="MockInstanceMultipleTSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="MockInstanceMultipleSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
     </mat-tab-group>
   </mat-expansion-panel>
 

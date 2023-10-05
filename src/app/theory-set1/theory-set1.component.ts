@@ -78,8 +78,7 @@ export class TheorySet1Component {
   })`;
 
   readonly JestMatchersToMatchTSCode = `  export class MyClass {
-    primitive1 = 'This is a raw string';
-    primitive2 = 'This is a raw string';
+    primitive = 'This is a raw string';
   }`;
   readonly JestMatchersToMatchSPECCode = `  describe('MyClass', () => {
     let instance: MyClass;
@@ -88,7 +87,7 @@ export class TheorySet1Component {
       instance = new MyClass();
     })
     it('should confirm primitive1 contains the word "string"', () => {
-      expect(instance.primitive1).toMatch(/string/);
+      expect(instance.primitive).toMatch(/string/);
     })
   })`;
 
@@ -256,7 +255,6 @@ export class TheorySet1Component {
       jest.spyOn(dependency, 'methodFromService').mockReturnValue('Hi there');
       
       expect(instance.method()).toEqual('Hi there');
-      expect(instance.method()).toEqual('Hi there');
     })
   })`;
 
@@ -287,7 +285,6 @@ export class TheorySet1Component {
   
       dependency.methodFromService = jest.fn().mockReturnValue('Hi there');
       
-      expect(instance.method()).toEqual('Hi there');
       expect(instance.method()).toEqual('Hi there');
     })
   })`;

@@ -140,34 +140,65 @@ export class TheorySet2Component {
     })
   })`;
 
-  readonly MockBuilderMockTSCode = ` @Component({
+  readonly MockBuilderMockTSCode = `  @Injectable()
+  export class MyService {
+    
+    baz = 'BAZ';
+
+    public fooGenerator(): string {
+      return 'FOO';
+    }
+    
+    public barGenerator(): string {
+      return 'BAR';
+    }
+  }
+  
+  @Component({
     selector: 'my-component',
     standalone: true,
     providers: [
-      { provide: CUSTOM_TOKEN, useValue: 'A token value' }
+      { provide: CUSTOM_TOKEN, useValue: 'A token value' },
+      MyService
     ],
   })
   export class MyComponent {
     constructor(
       @Inject(CUSTOM_TOKEN) public tokenValue: string,
+      private readonly myService: MyService,
     ) {}
+
+    getFoo(): string {
+      return this.myService.fooGenerator();
+    }
   }`;
   readonly MockBuilderMockHTMLCode = `  {{ tokenValue }}`;
   readonly MockBuilderMockSPECCode = `  describe('MyComponent', () => {
     let fixture: MockedComponentFixture<MyComponent>;
+    let component: MyComponent;
     const token = 'A mocked token value';
   
     beforeEach(() => {
       return MockBuilder(MyComponent)
         .mock(CUSTOM_TOKEN, token)
+        .mock(MyService, () => ({
+          fooGenerator: jest.fn().mockReturnValue('ALFA');
+          barGenerator: jest.fn();
+          baz: 'BAZ';
+        }))
     })
   
     beforeEach(() => {
       fixture = MockRender(MyComponent);
+      component = fixture.point.componentInstance;
     })
   
     it('should render the initial values of the form', () => {
       expect(fixture.nativeElement.innerHTML).toMatch(/mocked token/)
+    })
+
+    it('should return value defined in the service mock', () => {
+      expect(component.getFoo()).toEqual('ALFA');
     })
   })`;
   
