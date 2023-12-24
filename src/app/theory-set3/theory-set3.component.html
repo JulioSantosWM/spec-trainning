@@ -10,14 +10,23 @@
     </mat-expansion-panel-header>
     The most commonly used utility function provided by ng-mocks is <span class="code">ngMocks.get</span>.<br>
     This utility retrieves the instance of the service that is declared in the <span class="code">MockRender</span>.<br>
-    It is very useful to fetch the spies that are set in mocks that are defined at a describe level.<br>
+    I can be used to retrieve spies that are set at an higher level (describe).<br>
     <br>
-    If a service and its mock is setup after the <span class="code">MockRender</span>, then <span class="code">ngMocks.get</span> will not be able to fetch it.<br>
-
     <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
       <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesGetTSCode" [lineNumbers]="true"></code></pre></mat-tab>
       <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesGetSPECCode" [lineNumbers]="true"></code></pre></mat-tab>
     </mat-tab-group>
+    <br>
+    The <span class="code">ngMocks.get</span> receives an optional first argument that can be the component instance.<br>
+    This optional argument is required when trying to fetch provided classes like the <span class="code">ElementRef</span>.<br>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="TS"><pre><code [highlight]="ngMockUtilitiesGetPart2TSCode" [lineNumbers]="true"></code></pre></mat-tab>
+      <mat-tab label="SPEC"><pre><code [highlight]="ngMockUtilitiesGetPart2SPECCode" [lineNumbers]="true"></code></pre></mat-tab>
+    </mat-tab-group>
+    <br>
+    The explanation is that when a service is added to the <span class="code">MockRender</span> it adds it to the injector that is used by the <span class="code">ngMocks.get</span>.<br>
+    However, classes like the <span class="code">ElementRef</span> can't be added to the <span class="code">MockRender</span> (even if they are added, they are not passed).<br>
+    To access these instances, the we are required to pass has a first argument <span class="code">fixture.point</span> to the <span class="code">ngMocks.get</span>.<br>
   </mat-expansion-panel>
 
   <mat-expansion-panel>

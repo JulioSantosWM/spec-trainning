@@ -92,6 +92,40 @@ export class TheorySet3Component {
     })
   })`;
 
+  readonly ngMockUtilitiesGetPart2TSCode = `  @Component({
+    selector: 'app-my-component',
+    templateUrl: './my-component.html',
+    standalone: true,
+    providers: [
+      MyService
+    ]
+  })
+  export class MyComponent {
+    constructor(private readonly elementRef: ElementRef) { }
+  }`;
+ readonly ngMockUtilitiesGetPart2SPECCode = `  describe('MyComponent', () => {
+    let fixture: MockedComponentFixture<MyComponent>;
+    let service: MyComponent;
+
+    MockInstance.scope();
+
+    beforeEach(() => {
+      return MockBuilder(MyComponent);
+    })
+
+    function setup(): void {
+      fixture = MockRender(MyComponent);
+      service = fixture.point.componentInstance;
+    }
+
+    it('should allow for spies to be added', () => {
+      setup();
+      const elementRefInstance = ngMocks.get(fixture.point, ElementRef)
+
+      expect(elementRefInstance).toBeTruthy();
+    })
+  })`;
+
   readonly ngMockUtilitiesFindTSCode = `  @Injectable()
   export class MyService {
     foo = 'foo';
@@ -391,7 +425,7 @@ export class TheorySet3Component {
       }
     
       toggleSlider(value: boolean): void {
-        ngMocks.output('mat-slide-toggle', 'change).emit(value);
+        ngMocks.output('mat-slide-toggle', 'change').emit(value);
       }
 
     }
